@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit"
-// import reducers from "./reducers";
 import headerMenuReducer from "./reducers/header-menu"
 
 export const store = configureStore({

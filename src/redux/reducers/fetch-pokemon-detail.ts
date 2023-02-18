@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { fetchPokemonDetail } from "../actions"
-// import { create } from "domain"
 
 type Type = {
     name: string,
