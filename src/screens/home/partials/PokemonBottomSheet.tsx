@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { View, Text, Image, ActivityIndicator } from 'react-native'
+import { View, Text, Image, ActivityIndicator, BackHandler } from 'react-native'
 import { componentStyle } from '../../../styles/components';
 import { textStyle } from '../../../styles/base';
 import PokemonDetail from '../../../models/pokemon-detail';
@@ -10,8 +10,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamsLinks } from '../../../navigators/main-navigation';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-export default function PokemonBottomSheet({ id, }: { id: number }) {
+export default function PokemonBottomSheet({ id, closeBottomSheet }: { id: number, closeBottomSheet: (index: number, pokemonId: number) => void }) {
     const [pokemonData, setPokemonData] = useState<PokemonDetail>({
         id: 0,
         name: '',
@@ -42,19 +43,30 @@ export default function PokemonBottomSheet({ id, }: { id: number }) {
 
     if (isLoading) {
         return (
-        <View>
-            <ActivityIndicator size="large"/>
-        </View>
+            <View>
+                <ActivityIndicator size="large" />
+            </View>
         )
     }
 
     return (
-        <View style={{ ...componentStyle.pokemonBottomSheet }}>
-            <Text
-                style={{ ...textStyle.h1, ...textStyle.fontBold }}
+        <View style={{ ...componentStyle.pokemonBottomSheet, marginBottom: 30 }}>
+            <View
+                style={{ ...layoutStyle.row, ...layoutStyle.justifyBetween }}
             >
-                {pokemonData.name}
-            </Text>
+                <Text
+                    style={{ ...textStyle.h1, ...textStyle.fontBold }}
+                >
+                    {pokemonData.name}
+                </Text>
+                <FontAwesome5
+                    onPress={() => closeBottomSheet(-1, id)}
+                    name={'times'}
+                    size={24}
+                    color={"#d3d3d3"}
+                    solid
+                />
+            </View>
             <View
                 style={{ ...layoutStyle.widthFull, ...layoutStyle.alignCenter }}
             >

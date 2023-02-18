@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, Pressable, StyleSheet } from 'react-native'
 import React from 'react'
 import { textStyle } from '../../../styles/base'
 
@@ -74,67 +74,67 @@ export default function Pagination({ typeColor, totalData, offset, limit, change
                             <View style={styles.activeSquare}>
                                 <Text style={styles.activePaginationFont}> {currentPage} </Text>
                             </View>
-                            <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                            <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                 <Text style={styles.nonActivePaginationFont}> {onePageAfter} </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(twoPagesAfter)}>
+                            </Pressable>
+                            <Pressable style={styles.nonActiveSquare} onPress={() => goTo(twoPagesAfter)}>
                                 <Text style={styles.nonActivePaginationFont}> {twoPagesAfter} </Text>
-                            </TouchableOpacity>
+                            </Pressable>
                             <View style={styles.nonActiveSquare}>
                                 <Text style={styles.nonActivePaginationFont}> ... </Text>
                             </View>
-                            <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
+                            <Pressable style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
                                 <Text style={styles.nonActivePaginationFont}> {lastPage} </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                            </Pressable>
+                            <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                 <Text style={styles.nonActivePaginationFont}> {'>'} </Text>
-                            </TouchableOpacity>
+                            </Pressable>
                         </View>
                         :
                         currentPage === 2
                             ?
                             <View style={styles.paginationContainer}>
-                                <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                     <Text style={styles.nonActivePaginationFont}> {'<'} </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                </Pressable>
+                                <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                     <Text style={styles.nonActivePaginationFont}> {onePageBefore} </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                                 <View style={styles.activeSquare}>
                                     <Text style={styles.activePaginationFont}> {currentPage} </Text>
                                 </View>
-                                <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                                <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                     <Text style={styles.nonActivePaginationFont}> {onePageAfter} </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                                 <View style={styles.nonActiveSquare}>
                                     <Text style={styles.nonActivePaginationFont}> ... </Text>
                                 </View>
-                                <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
+                                <Pressable style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
                                     <Text style={styles.nonActivePaginationFont}> {lastPage} </Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                                </Pressable>
+                                <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                     <Text style={styles.nonActivePaginationFont}> {'>'} </Text>
-                                </TouchableOpacity>
+                                </Pressable>
                             </View>
                             :
                             currentPage === lastPage
                                 ?
                                 <View style={styles.paginationContainer}>
-                                    <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                    <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                         <Text style={styles.nonActivePaginationFont}> {'<'} </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
+                                    </Pressable>
+                                    <Pressable style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
                                         <Text style={styles.nonActivePaginationFont}> {firstPage} </Text>
-                                    </TouchableOpacity>
+                                    </Pressable>
                                     <View style={styles.nonActiveSquare}>
                                         <Text style={styles.nonActivePaginationFont}> ... </Text>
                                     </View>
-                                    <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(twoPagesBefore)}>
+                                    <Pressable style={styles.nonActiveSquare} onPress={() => goTo(twoPagesBefore)}>
                                         <Text style={styles.nonActivePaginationFont}> {twoPagesBefore} </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                    </Pressable>
+                                    <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                         <Text style={styles.nonActivePaginationFont}> {onePageBefore} </Text>
-                                    </TouchableOpacity>
+                                    </Pressable>
                                     <View style={styles.activeSquare}>
                                         <Text style={styles.activePaginationFont}> {currentPage} </Text>
                                     </View>
@@ -143,36 +143,36 @@ export default function Pagination({ typeColor, totalData, offset, limit, change
                                 currentPage < lastPage && currentPage > (lastPage - 2)
                                     ?
                                     <View style={styles.paginationContainer}>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                             <Text style={styles.nonActivePaginationFont}> {'<'} </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
+                                        </Pressable>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
                                             <Text style={styles.nonActivePaginationFont}> {firstPage} </Text>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                         <View style={styles.nonActiveSquare}>
                                             <Text style={styles.nonActivePaginationFont}> ... </Text>
                                         </View>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                             <Text style={styles.nonActivePaginationFont}> {onePageBefore} </Text>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                         <View style={styles.activeSquare}>
                                             <Text style={styles.activePaginationFont}> {currentPage} </Text>
                                         </View>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                             <Text style={styles.nonActivePaginationFont}> {onePageAfter} </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                                        </Pressable>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                             <Text style={styles.nonActivePaginationFont}> {'>'} </Text>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                     </View>
                                     :
                                     <View style={styles.paginationContainer}>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageBefore)}>
                                             <Text style={styles.nonActivePaginationFont}> {'<'} </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
+                                        </Pressable>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(firstPage)}>
                                             <Text style={styles.nonActivePaginationFont}> {firstPage} </Text>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                         <View style={styles.nonActiveSquare}>
                                             <Text style={styles.nonActivePaginationFont}> ... </Text>
                                         </View>
@@ -182,12 +182,12 @@ export default function Pagination({ typeColor, totalData, offset, limit, change
                                         <View style={styles.nonActiveSquare}>
                                             <Text style={styles.nonActivePaginationFont}> ... </Text>
                                         </View>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(lastPage)}>
                                             <Text style={styles.nonActivePaginationFont}> {lastPage} </Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
+                                        </Pressable>
+                                        <Pressable style={styles.nonActiveSquare} onPress={() => goTo(onePageAfter)}>
                                             <Text style={styles.nonActivePaginationFont}> {'>'} </Text>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                     </View>
                 }
             </View>

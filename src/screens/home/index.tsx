@@ -1,14 +1,17 @@
 import React, { useLayoutEffect, useState, useRef, useMemo, useCallback } from "react";
 import { View, ScrollView } from "react-native";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet"
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet"
 import Header from "../../components/header";
 import { fetchPokemons } from "./utils/LoadPokemon";
 import PokemonBottomSheet from "./partials/PokemonBottomSheet";
 import HomeContent from "./partials/HomeContent";
 import HomePokemonList from "./partials/HomePokemonList";
 import Pagination from "../../models/pagination";
+import { useAppSelector } from "../../redux/hooks";
 
 export default function HomeScreen() {
+    const isHeaderMenuOpen = useAppSelector(state => state.headerMenu.isHeaderMenuOpen)
+
     const [selectedPokemonId, setSelectedPokemonId] = useState(0)
     const [pokemonList, setPokemonList] = useState<Pagination>({
         count: 0,
@@ -23,7 +26,7 @@ export default function HomeScreen() {
     const scrollViewRef = useRef<ScrollView>(null);
     const pokemonListRef = useRef<View>(null);
     const bottomSheetRef = useRef<BottomSheet>(null);
-    const snapPoints = useMemo(() => ['60%', '90%'], []);
+    const snapPoints = useMemo(() => ['65%', '90%'], []);
 
     useLayoutEffect(() => {
         fetchPokemonList()
@@ -56,6 +59,9 @@ export default function HomeScreen() {
     }
 
     const handleBottomSheet = useCallback((index: number, pokemonId: number) => {
+        if (index == -1) {
+            return bottomSheetRef.current?.close()
+        }
         bottomSheetRef.current?.snapToIndex(index);
         setSelectedPokemonId(pokemonId)
         setIsBotoomSheetOpen(true)
@@ -64,40 +70,43 @@ export default function HomeScreen() {
     return (
         <View>
             <Header />
-            <ScrollView
-                ref={scrollViewRef}
-                scrollEventThrottle={16}
-                // infinite pagination
-                onMomentumScrollEnd={(e) => {
-                    const scrollPosition = e.nativeEvent.contentOffset.y
-                    const scrollViewHeight = e.nativeEvent.layoutMeasurement.height
-                    const contentHeight = e.nativeEvent.contentSize.height
+            {
+                isHeaderMenuOpen ? <View /> :
+                    <ScrollView
+                        ref={scrollViewRef}
+                        scrollEventThrottle={16}
+                        // infinite pagination
+                        onMomentumScrollEnd={(e) => {
+                            const scrollPosition = e.nativeEvent.contentOffset.y
+                            const scrollViewHeight = e.nativeEvent.layoutMeasurement.height
+                            const contentHeight = e.nativeEvent.contentSize.height
 
-                    const isScrolledToBottom = scrollViewHeight + scrollPosition
+                            const isScrolledToBottom = scrollViewHeight + scrollPosition
 
-                    if (stopFetching) {
-                        return;
-                    }
+                            if (stopFetching) {
+                                return;
+                            }
 
-                    if (isScrolledToBottom >= (contentHeight)) {
-                        fetchPokemonList()
-                    }
-                }}
-            >
-                <HomeContent
-                    scrollToListSection={scrollToListSection}
-                />
-                <View
-                    ref={pokemonListRef}
-                >
-                    <HomePokemonList
-                        count={pokemonList.count}
-                        pokemonList={pokemonList.results}
-                        stopFetching={stopFetching}
-                        handleBottomSheet={handleBottomSheet}
-                    />
-                </View>
-            </ScrollView>
+                            if (isScrolledToBottom >= (contentHeight)) {
+                                fetchPokemonList()
+                            }
+                        }}
+                    >
+                        <HomeContent
+                            scrollToListSection={scrollToListSection}
+                        />
+                        <View
+                            ref={pokemonListRef}
+                        >
+                            <HomePokemonList
+                                count={pokemonList.count}
+                                pokemonList={pokemonList.results}
+                                stopFetching={stopFetching}
+                                handleBottomSheet={handleBottomSheet}
+                            />
+                        </View>
+                    </ScrollView>
+            }
             {
                 isBotoomSheetOpen ?
                     <BottomSheet
@@ -107,12 +116,13 @@ export default function HomeScreen() {
                         enablePanDownToClose={true}
                         onClose={() => setIsBotoomSheetOpen(false)}
                     >
-                        <BottomSheetView>
+                        <BottomSheetScrollView>
                             <PokemonBottomSheet
                                 key={selectedPokemonId}
                                 id={selectedPokemonId}
+                                closeBottomSheet={handleBottomSheet}
                             />
-                        </BottomSheetView>
+                        </BottomSheetScrollView>
 
                     </BottomSheet>
                     :

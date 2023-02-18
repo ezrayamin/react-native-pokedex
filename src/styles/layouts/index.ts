@@ -11,6 +11,9 @@ export  const layoutStyle = StyleSheet.create({
     wrap: {
         flexWrap: "wrap"
     },
+    justifyBetween: {
+        justifyContent: 'space-between'
+    },
     justifyCenter: {
         justifyContent: 'center'
     },

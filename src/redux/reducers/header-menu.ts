@@ -1,15 +1,28 @@
+import { createSlice } from '@reduxjs/toolkit';
 
-import { headerMenuStatus } from '../action-enums';
-import {Action} from '../actions'
-const INITIAL_STATE = 'bars';
-
-const headerMenuReducer = (state: string = INITIAL_STATE, action: Action) => {
-    switch(action.type) {
-        case headerMenuStatus.close:
-            return 'times'
-        default:
-            return state
-    }
+type InitialState = {
+    isHeaderMenuOpen: boolean
 }
 
-export default headerMenuReducer
+const initialState: InitialState = {
+    isHeaderMenuOpen: false
+}
+
+const headerMenuSlice = createSlice({
+    name: "header",
+    initialState: {
+        isHeaderMenuOpen: false
+    },
+    reducers: {
+        open: state => {
+            state.isHeaderMenuOpen = true
+        },
+        close: state => {
+            state.isHeaderMenuOpen = false
+        }
+    }
+})
+
+const reducer = headerMenuSlice.reducer
+export default reducer
+export const {open, close} = headerMenuSlice.actions

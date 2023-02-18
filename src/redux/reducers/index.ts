@@ -1,10 +1,8 @@
-import {combineReducers} from "@reduxjs/toolkit"
-// import headerMenuReducer from "./header-menu"
-import PokemonDetailReducer from "./fetch-pokemon-detail"
+import headerMenuReducer from "./header-menu"
 
 
 const reducers = {
-    pokemon: PokemonDetailReducer
+    headerMenu: headerMenuReducer,
 }
 
 export default reducers

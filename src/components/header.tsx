@@ -1,18 +1,26 @@
-import React, { useState, } from "react";;
-import { useRoute } from '@react-navigation/native';
-import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
+import React from "react";;
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { View, Text, Image, FlatList, Pressable } from "react-native";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { layouts } from "../styles/components/layouts";
 import { layoutStyle } from "../styles/layouts";
 import { textStyle } from "../styles/base";
+import { open, close } from "../redux/reducers/header-menu"
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { StackParamsLinks } from "../navigators/main-navigation";
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const isHeaderMenuOpen = useAppSelector(state => state.headerMenu.isHeaderMenuOpen)
+    const dispatch = useAppDispatch()
+
+    type screenNavigationType = NativeStackNavigationProp<StackParamsLinks, "Pokemon Type">
+    const navigation = useNavigation<screenNavigationType>()
 
     const route = useRoute();
     const routeName = route.name;
 
-    const headerMenu = [
+    const menu = [
         {
             name: "Home",
         },
@@ -21,12 +29,19 @@ export default function Header() {
         }
     ]
 
+    function resetToHome() {
+        navigation.reset({
+            index: 0,
+            routes: [{name: "Home"}]
+        })
+    }
+
     function changeIcon() {
-        if (!isMenuOpen) {
-            return setIsMenuOpen(true)
+        if (!isHeaderMenuOpen) {
+            return dispatch(open())
         }
 
-        setIsMenuOpen(false)
+        dispatch(close())
     }
 
     return (
@@ -34,20 +49,24 @@ export default function Header() {
             <View
                 style={{ ...layouts.header }}
             >
-                <Image
-                    source={require('../assets/images/header-logo.png')}
-                />
-                <TouchableOpacity onPress={() => changeIcon()} >
-                    <FontAwesome5 name={isMenuOpen ? 'times' : 'bars'} solid />
-                </TouchableOpacity>
+                <Pressable
+                onPress={() => resetToHome()}
+                >
+                    <Image
+                        source={require('../assets/images/header-logo.png')}
+                    />
+                </Pressable>
+                <Pressable onPress={() => changeIcon()} >
+                    <FontAwesome5 name={isHeaderMenuOpen ? 'times' : 'bars'} solid />
+                </Pressable>
             </View>
             {
-                isMenuOpen ?
+                isHeaderMenuOpen ?
                     <View
                         style={{ ...layoutStyle.widthFull, ...layouts.headerMenu }}
                     >
                         <FlatList
-                            data={headerMenu}
+                            data={menu}
                             renderItem={({ item }) => {
                                 const pageName = item.name
                                 return (

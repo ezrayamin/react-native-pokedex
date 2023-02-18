@@ -7,6 +7,7 @@ import colorBasedOnType from "../../constants/colors";
 import { getIdFromUrl, pokemonIdFormat } from "../../helpers/string-manipulation";
 import Type from "../../models/pokemon-types";
 import { StackParamsLinks } from "../../navigators/main-navigation";
+import { useAppSelector } from "../../redux/hooks";
 import { textStyle } from "../../styles/base";
 import { componentStyle } from "../../styles/components";
 import { layoutStyle } from "../../styles/layouts";
@@ -17,6 +18,7 @@ import { fetchSelectedType } from "./utils/LoadType";
 type pokemonTypeScreenRouteType = RouteProp<StackParamsLinks, "Pokemon Type">
 
 export default function PokemonTypeScreen() {
+  const isHeaderMenuOpen = useAppSelector(state => state.headerMenu.isHeaderMenuOpen)
   const [typeData, setTypeData] = useState<Type>({
     id: 0,
     name: "",
@@ -49,28 +51,33 @@ export default function PokemonTypeScreen() {
   return (
     <View style={{ backgroundColor: 'white', height: "100%" }}>
       <Header />
-      <PokeballLogo
-        typeColor={color}
-      />
-      <View style={{ paddingHorizontal: 24, paddingVertical: 44 }}>
-        <Text style={{ ...textStyle.h1, ...textStyle.fontBold, marginBottom: 24, }}>
-          Pokemon with {'\n'}Type {typeData.id}
-        </Text>
-        <View style={{ ...componentStyle.pokemonTypeContainer }}>
-          <PokemonFlatList
-            pokemons={typeData.pokemon}
-            offset={offset}
-            limit={limit}
-          />
-          <Pagination
-            typeColor={color}
-            totalData={typeData.pokemon.length}
-            offset={offset}
-            limit={limit}
-            changePage={changePage}
-          />
-        </View>
-      </View>
+      {
+        isHeaderMenuOpen ? <View /> :
+          <>
+            <PokeballLogo
+              typeColor={color}
+            />
+            <View style={{ paddingHorizontal: 24, paddingVertical: 44 }}>
+              <Text style={{ ...textStyle.h1, ...textStyle.fontBold, marginBottom: 24, }}>
+                Pokemon with {'\n'}Type {typeData.id}
+              </Text>
+              <View style={{ ...componentStyle.pokemonTypeContainer }}>
+                <PokemonFlatList
+                  pokemons={typeData.pokemon}
+                  offset={offset}
+                  limit={limit}
+                />
+                <Pagination
+                  typeColor={color}
+                  totalData={typeData.pokemon.length}
+                  offset={offset}
+                  limit={limit}
+                  changePage={changePage}
+                />
+              </View>
+            </View>
+          </>
+      }
     </View>
   );
 }

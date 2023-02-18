@@ -1,21 +1,12 @@
-import {configureStore} from "@reduxjs/toolkit"
-import reducers from "./reducers";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import pokemonDetailSlice from "./reducers/fetch-pokemon-detail"; "./reducers/fetch-pokemon-detail"
-// export const store = createStore(
-//     reducers,
-//     {},
-//     applyMiddleware(thunk)
-// )
+import { configureStore } from "@reduxjs/toolkit"
+// import reducers from "./reducers";
+import headerMenuReducer from "./reducers/header-menu"
 
 export const store = configureStore({
     reducer: {
-        pokemon: pokemonDetailSlice
+        headerMenu: headerMenuReducer
     }
-
-}
-)
+})
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-// export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
