@@ -1,12 +1,11 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { View, Text, Image, ActivityIndicator, BackHandler } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, Image, ActivityIndicator, Pressable } from 'react-native'
 import { componentStyle } from '../../../styles/components';
 import { textStyle } from '../../../styles/base';
 import PokemonDetail from '../../../models/pokemon-detail';
 import { fetchSelectedPokemon } from '../utils/LoadPokemon';
 import { layoutStyle } from '../../../styles/layouts';
 import colorBasedOnType from '../../../constants/colors';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { StackParamsLinks } from '../../../navigators/main-navigation';
@@ -158,7 +157,7 @@ export default function PokemonBottomSheet({ id, closeBottomSheet }: { id: numbe
                                     const typeName = type.type.name;
                                     const typeColor = colorBasedOnType[typeName as keyof typeof colorBasedOnType];
                                     return (
-                                        <TouchableOpacity
+                                        <Pressable
                                             key={index}
                                             onPress={() => redirectToTypeScreen(url)}
                                         >
@@ -170,7 +169,7 @@ export default function PokemonBottomSheet({ id, closeBottomSheet }: { id: numbe
                                                     {typeName}
                                                 </Text>
                                             </View>
-                                        </TouchableOpacity>
+                                        </Pressable>
                                     )
                                 })
                             }

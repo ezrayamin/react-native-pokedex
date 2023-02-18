@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import { textStyle } from '../../../styles/base'
 import { componentStyle } from '../../../styles/components'
@@ -21,7 +21,7 @@ export default function HomeContent({ scrollToListSection }: { scrollToListSecti
                 >
                     Thousands of data compiled into one place
                 </Text>
-                <TouchableOpacity
+                <Pressable
                     onPress={() => {
                         scrollToListSection()
                     }}
@@ -32,7 +32,7 @@ export default function HomeContent({ scrollToListSection }: { scrollToListSecti
                     >
                         Check PokèDex
                     </Text>
-                </TouchableOpacity>
+                </Pressable>
 
             </View>
         </View>

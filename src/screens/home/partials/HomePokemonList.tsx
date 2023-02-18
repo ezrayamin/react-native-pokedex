@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 import { textStyle } from '../../../styles/base'
 import PokemonCard from './PokemonCard';
@@ -30,7 +30,7 @@ export default function HomePokemonList({ count,  pokemonList, stopFetching, han
                     const name = pokemon.name
                     if (index < pokemonList.length) {
                         return (
-                            <TouchableOpacity
+                            <Pressable
                                 key={id}
                                 onPress={() => handleBottomSheet(0, id)}
                             >
@@ -38,7 +38,7 @@ export default function HomePokemonList({ count,  pokemonList, stopFetching, han
                                     id={id}
                                     name={name}
                                 />
-                            </TouchableOpacity>
+                            </Pressable>
                         )
                     }
                 })

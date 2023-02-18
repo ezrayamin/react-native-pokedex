@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native"
+import { Platform, StyleSheet } from "react-native"
 export const layouts = StyleSheet.create({
     header: { 
         display: 'flex', 
@@ -6,7 +6,7 @@ export const layouts = StyleSheet.create({
         justifyContent: 'space-between', 
         paddingHorizontal: 24, 
         paddingVertical: 12, 
-        marginTop: 40, 
+        marginTop: Platform.OS == "ios" ? 40 : 0, 
     },
     headerMenu: {
         position: 'absolute',
