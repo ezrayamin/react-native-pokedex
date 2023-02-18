@@ -5,4 +5,4 @@
   - npm version: 8.1.2
   
 ## APK download:
-https://drive.google.com/file/d/1t0nV87JsMg3xRyAvGiY-YhvtsnYsrsCl/view?usp=sharing
+https://expo.dev/artifacts/eas/E4b2Urq3zrZqkR1X4VheF.apk

@@ -24,10 +24,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/splash-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.ezrayamin.ReyidTestPokedex"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1c88e5d1-270b-43a3-bfed-b5b74a30b8c7"
+      }
     }
   }
 }
